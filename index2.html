@@ -1,25 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Видалення чогось</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <meta charset="UTF-8">
+    <title>Видалення Гаманців</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+        h1, h2 { color: #2c3e50; }
+        form { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        input { margin: 5px 0; padding: 5px; width: 100%; box-sizing: border-box; }
+        input[type="submit"] { background-color: #3498db; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #2980b9; }
+        ul { padding-left: 20px; }
+    </style>
 </head>
 <body>
-    <div class="text">
-        <input type="text" id="userInput" name="userInput" placeholder="Назва фінансового запису">
-        <button type="submit" onclick="checkInput()">Видалити</button>
-        </div>
+    <h1>Ваші гаманці</h1>
+    {% if wallets %}
+        <ul>
+            {% for currency, balance in wallets.items() %}
+                <li><strong>{{ currency }}</strong>: {{ balance }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Гаманці відсутні.</p>
+    {% endif %}
 
-    <div href="">Меню</div>
-    <div href="">додавати новий фінансововий запис</div>
-    <div href="">перегляд балансу</div>
-    <div href="">звіт за тиждень</div>
-    
-    <div id="message" style="margin-top: 20px;"></div>
-    <script src="script.js"></script>
+    <h2>видалити гаманець</h2>
+    <form action="/delete_wallet" method="post">
+        <label>назва гаманьцю:</label>
+        <input type="text" name="wallet_name" placeholder="наприклад, wallet1" required>
+        <input type="submit" value="видалити гаманець">
+    </form>
 </body>
 </html>
