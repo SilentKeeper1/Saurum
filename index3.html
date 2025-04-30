@@ -24,36 +24,18 @@
     {% else %}
         <p>Гаманці відсутні.</p>
     {% endif %}
-
-    <h2>Створити новий гаманець</h2>
-    <form action="/create_wallet" method="post">
-        <label>Валюта:</label>
-        <input type="text" name="currency" placeholder="наприклад, USD" required>
-        <label>Початковий баланс:</label>
-        <input type="number" name="balance" step="0.01" required>
-        <input type="submit" value="Створити гаманець">
-    </form>
-
-    <h2>Конвертувати валюту</h2>
+    
+     <h2>Конвертувати валюту</h2>
     <form action="/convert" method="post">
         <label>З валюти:</label>
         <input type="text" name="from_currency" placeholder="наприклад, USD" required>
         <label>У валюту:</label>
         <input type="text" name="to_currency" placeholder="наприклад, EUR" required>
+        <label>в каком кошельке:</label>
+        <input type="text" name="wallet_name" placeholder="наприклад, wallet1" required>
         <label>Сума:</label>
         <input type="number" name="amount" step="0.01" required>
         <input type="submit" value="Конвертувати">
-    </form>
-
-    <h2>Встановити курс обміну</h2>
-    <form action="/set_rate" method="post">
-        <label>З валюти:</label>
-        <input type="text" name="from_currency" placeholder="наприклад, USD" required>
-        <label>У валюту:</label>
-        <input type="text" name="to_currency" placeholder="наприклад, EUR" required>
-        <label>Курс:</label>
-        <input type="number" name="rate" step="0.0001" required>
-        <input type="submit" value="Зберегти курс">
     </form>
 </body>
 </html>
