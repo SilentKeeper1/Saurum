@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
             messageElement.textContent = "Такого запису не існує!";
             messageElement.style.color = "red";
         } else {
-            // Видалення запису
+            
             const index = validValues.indexOf(input.toLowerCase());
             if (index !== -1) {
                 validValues.splice(index, 1);
-                messageElement.textContent = Запис "${input}" успішно видалено!;
+                messageElement.textContent = `Запис "${input}" успішно видалено!`;
                 messageElement.style.color = "green";
             }
             console.log("Оновлений список записів:", validValues);
