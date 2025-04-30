@@ -1,3 +1,6 @@
+#4)Напишіть логіку для розрахунку загального балансу на основі введених транзакцій, 
+# враховуючи прибутки та витрати.
+
 def calulate_balance(transactions):
     balance = 0
     for transaction in transactions:
