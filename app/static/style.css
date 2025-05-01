@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif; /* Добавил fallback шрифт */
+    max-width: 600px;
+    margin: 0 auto; /* Лучшая поддержка старых браузеров */
+    padding: 20px;
+    line-height: 1.5; /* Улучшает читаемость текста */
+}
+
+h1, h2 { 
+    color: #2c3e50;
+    margin-top: 0; /* Убирает отступ сверху по умолчанию */
+}
+
+form {
+    margin-bottom: 20px;
+    padding: 15px; /* Увеличил отступы */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9; /* Лёгкий фон для формы */
+}
+
+input {
+    margin: 8px 0; /* Увеличил отступы */
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd; /* Добавил границу */
+    border-radius: 3px; /* Скругление углов */
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px; /* Увеличил отступы для кнопки */
+    font-weight: bold;
+    transition: background 0.3s; /* Плавный hover-эффект */
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+ul {
+    padding-left: 20px;
+    list-style-type: none; /* Убирает маркеры списка */
+}
+
+li {
+    margin-bottom: 8px; /* Отступ между пунктами списка */
+}

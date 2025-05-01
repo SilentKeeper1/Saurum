@@ -3,15 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Менеджер Гаманців</title>
-    <style>
-        body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
-        h1, h2 { color: #2c3e50; }
-        form { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-        input { margin: 5px 0; padding: 5px; width: 100%; box-sizing: border-box; }
-        input[type="submit"] { background-color: #3498db; color: white; border: none; cursor: pointer; }
-        input[type="submit"]:hover { background-color: #2980b9; }
-        ul { padding-left: 20px; }
-    </style>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
     <h1>Ваші гаманці</h1>
@@ -24,6 +16,8 @@
     {% else %}
         <p>Гаманці відсутні.</p>
     {% endif %}
+
+    <div></div>
 
     <h2>Створити новий гаманець</h2>
     <form action="/create_wallet" method="post">
