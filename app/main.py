@@ -6,7 +6,7 @@ manager = WalletManager()
 
 @app.route('/')
 def index():
-    return render_template('index.html', wallets=manager.get_wallet())
+    return render_template('index.html', wallets=manager.get_wallet(), tarnsaction_log=manager.get_transaction_log())
 
 @app.route('/create_wallet', methods=['POST'])
 def create_wallet():
@@ -35,6 +35,12 @@ def set_rate():
     to_cur = request.form['to_currency']
     rate = float(request.form['rate'])
     manager.add_exchange_rate(from_cur, to_cur, rate)
+    return redirect(url_for('index'))
+
+
+@app.route('/reset', methods=['POST'])
+def reset_wallets():
+    manager.reset_wallet()
     return redirect(url_for('index'))
 
 
