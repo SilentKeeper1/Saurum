@@ -1,18 +1,25 @@
-/* Общие стили */
-body {
-    font-family: 'Segoe UI', Arial, sans-serif; /* Шрифт как в Windows */
+/* ===== Общие стили ===== */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
     max-width: 800px;
-    margin: 60px auto 20px; /* Учтём высоту фиксированного mainbar */
+    margin: 60px auto 20px;
     padding: 20px;
     line-height: 1.5;
     background-color: #f5f5f5;
-}
-
-/* Стиль для Hot-Bar (как в Windows) */
-.mainbar {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* ===== Hot-Bar (Windows-стиль) ===== */
+  .mainbar {
     position: fixed;
     top: 0;
-    left: 0px;
+    left: 0;
     width: 100%;
     height: 48px;
     background: #2b2b2b;
@@ -22,14 +29,28 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     gap: 10px;
-    justify-content: space-between; /* Расстояние между кнопками */
-}
-
-.mainbar .button {
+  }
+  
+  /* Изображение/лого слева */
+  .bom {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    margin-right: 10px;
+    border-radius: 4px;
+    transition: transform 0.2s;
+  }
+  
+  .bom:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Кнопки в панели */
+  .mainbar .button {
     text-decoration: none;
-}
-
-.mainbar button {
+  }
+  
+  .mainbar button {
     background: #3a3a3a;
     color: white;
     border: none;
@@ -38,40 +59,65 @@ body {
     cursor: pointer;
     font-size: 14px;
     transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    height: 32px; /* Фиксированная высота как в Windows */
-}
-
-.mainbar button:hover {
+    height: 32px;
+  }
+  
+  .mainbar button:hover {
     background: #505050;
-}
-
-.mainbar button:active {
+  }
+  
+  .mainbar button:active {
     background: #1a1a1a;
     transform: scale(0.98);
-}
-
-/* Улучшенные стили для форм */
-form {
+  }
+  
+  /* ===== Контент ===== */
+  h1, h2 {
+    color: #2c3e50;
+    margin-top: 0;
+  }
+  
+  /* Список кошельков */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Формы */
+  form {
     background: white;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-input[type="text"],
-input[type="number"] {
+  }
+  
+  input[type="text"],
+  input[type="number"] {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
-}
-
-input[type="submit"] {
-    background-color: #0078d7; /* Синий как в Windows */
+  }
+  
+  input[type="submit"] {
+    background-color: #0078d7;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -79,45 +125,83 @@ input[type="submit"] {
     cursor: pointer;
     margin-top: 10px;
     transition: background 0.2s;
-}
-
-input[type="submit"]:hover {
+  }
+  
+  input[type="submit"]:hover {
     background-color: #106ebe;
-}
-
-/* Стиль для списка кошельков */
-ul {
-    list-style-type: none;
-    padding: 0;
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-}
-
-li:last-child {
-    border-bottom: none;
-}
-
-/* Кнопка "Очистити все" */
-input[value="Очистити все"] {
-    background-color: #d83b01 !important; /* Красный как в Windows */
-}
-
-input[value="Очистити все"]:hover {
+  }
+  
+  /* Особые кнопки */
+  input[value="Очистити все"] {
+    background-color: #d83b01 !important;
+  }
+  
+  input[value="Очистити все"]:hover {
     background-color: #e81123 !important;
-}
-
-.bom{width: 32px; /* Фиксированный размер */
-    height: 32px;
-    object-fit: contain; /* Сохраняет пропорции */
-    margin-left: auto; /* Прижимает вправо */
-    border-radius: 4px; /* Опционально: скругление углов */
-    transition: transform 0.2s;}
+  }
+  
+  /* ===== Адаптация под экраны ===== */
+  @media (max-width: 768px) {
+    body {
+      margin-top: 50px;
+      padding: 10px;
+      font-size: 14px;
+    }
+    
+    .mainbar {
+      height: auto;
+      padding: 10px 15px;
+      flex-wrap: wrap;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    form {
+      padding: 15px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .mainbar {
+      gap: 8px;
+    }
+    
+    .mainbar button {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    
+    .bom {
+      width: 24px;
+      height: 24px;
+    }
+    
+    ul {
+      padding: 10px;
+    }
+    
+    li {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    input[type="text"],
+    input[type="number"],
+    input[type="submit"] {
+      padding: 8px;
+    }
+    
+    input[type="submit"] {
+      width: 100%;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    body {
+      max-width: 1000px;
+    }
+  }
