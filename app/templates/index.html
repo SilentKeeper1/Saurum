@@ -28,6 +28,16 @@
           <li>Можливість повного скидання всіх даних</li>
         </ul>
       </section>
+      <h1>Ваші гаманці</h1>
+    {% if wallets %}
+        <ul>
+            {% for currency, balance in wallets.items() %}
+                <li><strong>{{ currency }}</strong>: {{ balance }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Гаманці відсутні.</p>
+    {% endif %}
       <footer>
         <p>© 2025 Менеджер Гаманців. Створено вами з ❤️</p>
         <a href="https://github.com/SilentKeeper1/Saurum/tree/main" target="_blank">Вихідний код</a>
