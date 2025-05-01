@@ -8,40 +8,22 @@ manager = WalletManager()
 def index():
     return render_template('index.html', wallets=manager.get_wallet(), tarnsaction_log=manager.get_transaction_log())
 
-@app.route('/create_wallet', methods=['POST'])
+@app.route('/create_wallet')
 def create_wallet():
-    currency = request.form['currency']
-    balance = float(request.form['balance'])
-    try:
-        manager.create_wallet(currency, balance)
-    except ValueError as e:
-        return str(e), 400
-    return redirect(url_for('index'))
+    return render_template('index3.html')
 
-@app.route('/convert', methods=['POST'])
+@app.route('/convert')
 def convert():
-    from_cur = request.form['from_currency']
-    to_cur = request.form['to_currency']
-    amount = float(request.form['amount'])
-    try:
-        manager.convert(from_cur, to_cur, amount)
-    except ValueError as e:
-        return str(e), 400
-    return redirect(url_for('index'))
+    return render_template('index2.html')
 
-@app.route('/set_rate', methods=['POST'])
+@app.route('/set_rate')
 def set_rate():
-    from_cur = request.form['from_currency']
-    to_cur = request.form['to_currency']
-    rate = float(request.form['rate'])
-    manager.add_exchange_rate(from_cur, to_cur, rate)
-    return redirect(url_for('index'))
+    return render_template('index3.html')
 
 
-@app.route('/reset', methods=['POST'])
+@app.route('/reset')
 def reset_wallets():
-    manager.reset_wallet()
-    return redirect(url_for('index'))
+    return render_template('index4.html')
 
 
 if __name__ == '__main__':
