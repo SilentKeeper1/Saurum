@@ -6,12 +6,22 @@ manager = WalletManager()
 
 @app.route('/')
 def index():
-    return render_template('index.html', wallets=manager.get_wallet(), tarnsaction_log=manager.get_transaction_log())
+    return render_template('index.html', wallets=manager.get_wallet(), transaction_log=manager.get_transaction_log())
 
-@app.route('/create_wallet')
+# Добавляем поддержку POST для создания кошелька
+@app.route('/create_wallet', methods=['GET', 'POST'])  # <- Вот это важно!
 def create_wallet():
-    return render_template('index3.html')
+    if request.method == 'POST':
+        currency = request.form['currency'].upper()
+        balance = float(request.form['balance'])
+        try:
+            manager.create_wallet(currency, balance)
+            return redirect(url_for('index'))  # Перенаправляем на главную
+        except ValueError as e:
+            return str(e), 400  # Показываем ошибку, если валюта уже существует
+    return render_template('index3.html')  # GET: показываем форму
 
+# Остальные роуты (оставляем как есть)
 @app.route('/convert')
 def convert():
     return render_template('index2.html')
@@ -20,11 +30,9 @@ def convert():
 def set_rate():
     return render_template('index3.html')
 
-
 @app.route('/reset')
 def reset_wallets():
     return render_template('index4.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
