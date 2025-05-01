@@ -7,17 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>Ваші гаманці</h1>
-    {% if wallets %}
-        <ul>
-            {% for currency, balance in wallets.items() %}
-                <li><strong>{{ currency }}</strong>: {{ balance }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Гаманці відсутні.</p>
-    {% endif %}
-
     <div class="mainbar"> 
         <img class="bom" src="static/image/лицо.png" width="32" height="32">
         <a href="http://127.0.0.1:5000/create_wallet" class="button"><button>создать кошелек</button></a> 
@@ -27,40 +16,23 @@
         <a href="http://127.0.0.1:5000/set_rate" class="button"><button>Перейти</button></a>
     </div>
 
-    <h2>Створити новий гаманець</h2>
-    <form action="/create_wallet" method="post">
-        <label>Валюта:</label>
-        <input type="text" name="currency" placeholder="наприклад, USD" required>
-        <label>Початковий баланс:</label>
-        <input type="number" name="balance" step="0.01" required>
-        <input type="submit" value="Створити гаманець">
-    </form>
-
-    <h2>Конвертувати валюту</h2>
-    <form action="/convert" method="post">
-        <label>З валюти:</label>
-        <input type="text" name="from_currency" placeholder="наприклад, USD" required>
-        <label>У валюту:</label>
-        <input type="text" name="to_currency" placeholder="наприклад, EUR" required>
-        <label>Сума:</label>
-        <input type="number" name="amount" step="0.01" required>
-        <input type="submit" value="Конвертувати">
-    </form>
-
-    <h2>Встановити курс обміну</h2>
-    <form action="/set_rate" method="post">
-        <label>З валюти:</label>
-        <input type="text" name="from_currency" placeholder="наприклад, USD" required>
-        <label>У валюту:</label>
-        <input type="text" name="to_currency" placeholder="наприклад, EUR" required>
-        <label>Курс:</label>
-        <input type="number" name="rate" step="0.0001" required>
-        <input type="submit" value="Зберегти курс">
-    </form>
-    <h2>Очистити всі гаманці</h2>
-    <form action="/reset" method="post">
-        <input type="submit" value="Очистити все" style="background-color: red;">
-    </form>
+    <h1>Менеджер Гаманців</h1>
+    <p>Контролюй свої фінанси легко і швидко</p>
+    <section>
+        <h2>Що вміє цей сайт?</h2>
+        <ul>
+          <li>Створення гаманців у різних валютах (USD, EUR, BTC тощо)</li>
+          <li>Перегляд і оновлення балансу</li>
+          <li>Конвертація між валютами за заданим курсом</li>
+          <li>Збереження історії транзакцій</li>
+          <li>Можливість повного скидання всіх даних</li>
+        </ul>
+      </section>
+      <footer>
+        <p>© 2025 Менеджер Гаманців. Створено вами з ❤️</p>
+        <a href="https://github.com/SilentKeeper1/Saurum/tree/main" target="_blank">Вихідний код</a>
+      </footer>
+                
     
 </body>
 </html>
