@@ -2,36 +2,52 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Менеджер Гаманців</title>
+    <title>Конвертація валют</title>
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <h1>Ваші гаманці</h1>
-    {% if wallets %}
-        <ul>
-            {% for currency, balance in wallets.items() %}
-                <li><strong>{{ currency }}</strong>: {{ balance }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Гаманці відсутні.</p>
-    {% endif %}
+    <h1>Конвертація валют</h1>
     
-     <h2>Конвертувати валюту</h2>
-    <form action="/convert" method="post">
-        <label>З валюти:</label>
-        <input type="text" name="from_currency" placeholder="наприклад, USD" required>
-        <label>У валюту:</label>
-        <input type="text" name="to_currency" placeholder="наприклад, EUR" required>
-        <label>в каком кошельке:</label>
-        <input type="text" name="wallet_name" placeholder="наприклад, wallet1" required>
-        <label>Сума:</label>
-        <input type="number" name="amount" step="0.01" required>
-        <input type="submit" value="Конвертувати">
-    </form>
-    <a href="http://127.0.0.1:5000">
-        <button>меню</button>
-    </a>
+    {% if error %}<div style="color:red">{{ error }}</div>{% endif %}
+    {% if success %}<div style="color:green">{{ success }}</div>{% endif %}
 
+    <form method="post">
+        <div>
+            <label>З валюти:
+                <select name="from_currency" required>
+                    {% for currency in wallets %}
+                        <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <label>У валюту:
+                <select name="to_currency" required>
+                    {% for currency in wallets %}
+                        <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <label>Сума:
+                <input type="number" name="amount" step="0.01" min="0.01" required>
+            </label>
+        </div>
+
+        <button type="submit">Конвертувати</button>
+    </form>
+
+    <h3>Доступні валюти:</h3>
+    <ul>
+        {% for currency, balance in wallets.items() %}
+            <li>{{ currency }}: {{ balance }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">← На головну</a>
 </body>
 </html>

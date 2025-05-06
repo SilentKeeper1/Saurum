@@ -2,11 +2,21 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Менеджер Гаманців</title>
+    <title>Встановлення курсу обміну</title>
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <h1>Ваші гаманці</h1>
+    <h1>Встановлення курсу обміну</h1>
+    
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    
+    {% if success %}
+        <div class="success">{{ success }}</div>
+    {% endif %}
+
+    <h2>Доступні валюти:</h2>
     {% if wallets %}
         <ul>
             {% for currency, balance in wallets.items() %}
@@ -14,42 +24,39 @@
             {% endfor %}
         </ul>
     {% else %}
-        <p>Гаманці відсутні.</p>
+        <p>Гаманці відсутні. Спочатку створіть гаманець.</p>
     {% endif %}
 
-    <h2>Створити новий гаманець</h2>
-    <form action="/create_wallet" method="post">
-        <label>Валюта:</label>
-        <input type="text" name="currency" placeholder="наприклад, USD" required>
-        <label>Початковий баланс:</label>
-        <input type="number" name="balance" step="0.01" required>
-        <input type="submit" value="Створити гаманець">
-    </form>
-
-    <h2>Конвертувати валюту</h2>
-    <form action="/convert" method="post">
-        <label>З валюти:</label>
-        <input type="text" name="from_currency" placeholder="наприклад, USD" required>
-        <label>У валюту:</label>
-        <input type="text" name="to_currency" placeholder="наприклад, EUR" required>
-        <label>Сума:</label>
-        <input type="number" name="amount" step="0.01" required>
-        <input type="submit" value="Конвертувати">
-    </form>
-
-    <h2>Встановити курс обміну</h2>
+    <h2>Встановити новий курс</h2>
     <form action="/set_rate" method="post">
-        <label>З валюти:</label>
-        <input type="text" name="from_currency" placeholder="наприклад, USD" required>
-        <label>У валюту:</label>
-        <input type="text" name="to_currency" placeholder="наприклад, EUR" required>
-        <label>Курс:</label>
-        <input type="number" name="rate" step="0.0001" required>
-        <input type="submit" value="Зберегти курс">
-    </form>
-    <a href="http://127.0.0.1:5000">
-        <button>меню</button>
-    </a>
+        <div class="form-group">
+            <label for="from_currency">З валюти:</label>
+            <select id="from_currency" name="from_currency" required>
+                {% for currency in wallets %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
+        <div class="form-group">
+            <label for="to_currency">У валюту:</label>
+            <select id="to_currency" name="to_currency" required>
+                {% for currency in wallets %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rate">Курс обміну (1 одиниця "З" в "У"):</label>
+            <input type="number" id="rate" name="rate" step="0.0001" min="0.0001" required>
+        </div>
+
+        <button type="submit">Зберегти курс</button>
+    </form>
+
+    <div style="margin-top: 20px;">
+        <a href="/">← Повернутися до меню</a>
+    </div>
 </body>
 </html>

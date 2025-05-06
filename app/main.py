@@ -6,33 +6,54 @@ manager = WalletManager()
 
 @app.route('/')
 def index():
-    return render_template('index.html', wallets=manager.get_wallet(), transaction_log=manager.get_transaction_log())
+    return render_template('index.html', 
+                         wallets=manager.get_wallet(),
+                         transaction_log=manager.get_transaction_log())
 
-# Добавляем поддержку POST для создания кошелька
-@app.route('/create_wallet', methods=['GET', 'POST'])  # <- Вот это важно!
+@app.route('/create_wallet', methods=['GET', 'POST'])
 def create_wallet():
     if request.method == 'POST':
         currency = request.form['currency'].upper()
         balance = float(request.form['balance'])
         try:
             manager.create_wallet(currency, balance)
-            return redirect(url_for('index'))  # Перенаправляем на главную
+            return redirect(url_for('index'))
         except ValueError as e:
-            return str(e), 400  # Показываем ошибку, если валюта уже существует
-    return render_template('index3.html')  # GET: показываем форму
-
-# Остальные роуты (оставляем как есть)
-@app.route('/convert')
-def convert():
+            return str(e), 400
     return render_template('index2.html')
 
-@app.route('/set_rate')
+# Основное изменение здесь - добавлен wallets в контекст
+@app.route('/convert', methods=['GET', 'POST'])
+def convert():
+    if request.method == 'POST':
+        try:
+            from_currency = request.form['from_currency']
+            to_currency = request.form['to_currency']
+            amount = float(request.form['amount'])
+            converted = manager.convert(from_currency, to_currency, amount)
+            return render_template('index3.html',
+                                 wallets=manager.get_wallet(),
+                                 success=f"Успішно конвертовано {amount} {from_currency} → {converted:.2f} {to_currency}")
+        except ValueError as e:
+            return render_template('index3.html',
+                                 wallets=manager.get_wallet(),
+                                 error=str(e))
+    return render_template('index3.html', wallets=manager.get_wallet())
+
+@app.route('/set_rate', methods=['GET', 'POST'])
 def set_rate():
-    return render_template('index3.html')
+    if request.method == 'POST':
+        from_currency = request.form['from_currency']
+        to_currency = request.form['to_currency']
+        rate = float(request.form['rate'])
+        manager.add_exchange_rate(from_currency, to_currency, rate)
+        return redirect(url_for('index'))
+    return render_template('index4.html', wallets=manager.get_wallet())
 
 @app.route('/reset')
 def reset_wallets():
-    return render_template('index4.html')
+    manager.reset_wallet()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
