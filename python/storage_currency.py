@@ -1,9 +1,3 @@
-#1)Створіть структуру даних для зберігання інформації про кошельки користувачів. 
-# Кожен кошелек містить назву валюти і баланс.
-
-#перший варіант
-# Стркутра для одного користуача з кількома гаманецьами
-
 wallets = {
     "user1": [
         {"currency": "USD", "balance": 150.75},
@@ -19,8 +13,6 @@ wallets = {
 for wallet in wallets["user1"]:
     print(f"Валюта: {wallet['currency']}, Баланс: {wallet['balance']}")
 
-#другий варіант
-# Через класи для КОРИСТУВАЧІВ
 class Wallet:
     def __init__(self, currency, balance):
         self.currency = currency

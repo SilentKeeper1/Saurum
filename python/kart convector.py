@@ -1,5 +1,3 @@
-#4) Реалізуйте функцію, що дозволяє конвертувати певну суму з одного кошелька в інший за заданим курсом.
-
 class Wallet:
     def __init__(self, currency, initial_balance):
         self.currency = currency
@@ -29,13 +27,10 @@ def convert(wallet_from, wallet_to, amount, exchange_rates):
         raise ValueError("Exchange rate not found")
     converted_amount = amount * rate
 
-    # Знімаємо суму з першого гаманця
     wallet_from.subtract_funds(amount)
 
-    # Додаємо конвертовану суму в другий гаманець
     wallet_to.add_funds(converted_amount)
 
-# Приклад
 wallet1 = Wallet("USD", 1000)
 wallet2 = Wallet("EUR", 500)
 

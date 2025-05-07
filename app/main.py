@@ -22,7 +22,6 @@ def create_wallet():
             return str(e), 400
     return render_template('index2.html')
 
-# Основное изменение здесь - добавлен wallets в контекст
 @app.route('/convert', methods=['GET', 'POST'])
 def convert():
     if request.method == 'POST':

@@ -1,4 +1,3 @@
-#5) Напишіть функцію, яка виводить поточний стан всіх кошельків користувача.
 class Wallet:
     def __init__(self, currency, initial_balance):
         self.currency = currency

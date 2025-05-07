@@ -1,5 +1,3 @@
-#7) Додайте можливість "перезавантажувати" кошельки.
-
 class Wallet:
     def __init__(self, currency, initial_balance):
         self.currency = currency

@@ -1,5 +1,3 @@
-#6) Логуйте всі операції з кошельками для можливості відстеження історії транзакцій користувача.
-
 class Wallet:
     def __init__(self, currency, initial_balance):
         self.currency = currency

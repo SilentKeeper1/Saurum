@@ -1,5 +1,3 @@
-#2) Дозвольте користувачам створювати новий кошелек з заданою валютою і початковим балансом.
-
 class Wallet:
     def __init__(self, currency, initial_balance):
         self.currency = currency
